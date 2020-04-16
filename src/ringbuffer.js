@@ -1,15 +1,11 @@
 /**
- * RingBuffer implements classic fixed length ring buffer, or circular queue, buffering.
+ * RingBuffer implements classic fixed length ring buffer, or circular queue.
  *
  * The methods match the Array signature for push, pop, unshift, and shift.
  *
  * For buffer operation either use push/shift together, or unshift/pop together.
  *
  * RingBuffer is substantially faster than an Array for this use case.
- * Relative times for the same number of push/shift operations are:
- * Array: 18095ms
- * RingBuffer: 840ms
- * @toolbuilder/list: 5850ms
  */
 export class RingBuffer {
   /**

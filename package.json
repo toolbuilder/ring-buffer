@@ -7,7 +7,10 @@
   "circular queue",
   "buffer",
   "iterable",
-  "esm"
+  "esm",
+  "ES2015",
+  "module",
+  "bundles"
  ],
  "homepage": "https://github.com/toolbuilder/ring-buffer#readme",
  "bugs": {
@@ -24,8 +27,9 @@
   "src"
  ],
  "scripts": {
-  "build": "npm-run-all --serial test lint",
+  "build": "npm-run-all --serial test lint docs",
   "lint": "eslint src test",
+  "docs": "pnpx documentation build src/ringbuffer.js -f md > docs/ringbuffer.md",
   "test": "tape -r esm \"test/*_test.js\""
  },
  "eslintConfig": {
@@ -37,6 +41,7 @@
  "devDependencies": {
   "@toolbuilder/eslint-config": ">=0.1.2",
   "@toolbuilder/list": "^1.0.0",
+  "documentation": "^12.3.0",
   "eslint": ">=6.8.0",
   "npm-run-all": "^4.1.5",
   "tape": "^4.13.2",
