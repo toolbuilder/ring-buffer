@@ -57,25 +57,31 @@ export class RingBuffer {
   }
 
   /**
-   * Removes a value from the back of the buffer and returns it.
+   * Removes a value from the back of the buffer and returns it. The
+   * newly empty buffer location is set to undefined to release any
+   * object references.
    * @returns {any} the value removed from the back of the buffer
    * or `undefined` if empty.
    */
   pop () {
     if (this.length === 0) return undefined
     const value = this._buffer[this._last]
+    this._buffer[this._last] = undefined // release reference on memory
     this.length--
     return value
   }
 
   /**
-   * Removes a value from the front of the buffer and returns it.
+   * Removes a value from the front of the buffer and returns it. The
+   * newly empty buffer location is set to undefined to release any
+   * object references.
    * @returns {any} the value removed from the front of the buffer
    * or `undefined` if empty.
    */
   shift () {
     if (this.length === 0) return undefined
     const value = this._buffer[this._first]
+    this._buffer[this._first] = undefined // release reference on memory
     this.length--
     this._right()
     return value

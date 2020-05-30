@@ -8,12 +8,10 @@
     -   [back][4]
     -   [front][5]
     -   [push][6]
-        -   [Parameters][7]
-    -   [pop][8]
-    -   [shift][9]
-    -   [unshift][10]
-        -   [Parameters][11]
-    -   [iterator][12]
+    -   [pop][7]
+    -   [shift][8]
+    -   [unshift][9]
+    -   [iterator][10]
 
 ## RingBuffer
 
@@ -27,7 +25,7 @@ RingBuffer is substantially faster than an Array for this use case.
 
 ### Parameters
 
--   `capacity` **[Number][13]** maximum number of values in the buffer
+-   `capacity` **[Number][11]** maximum number of values in the buffer
 
 ### clear
 
@@ -56,14 +54,18 @@ the value at the front of the buffer is discarded.
 
 ### pop
 
-Removes a value from the back of the buffer and returns it.
+Removes a value from the back of the buffer and returns it. The
+newly empty buffer location is set to undefined to release any
+object references.
 
 Returns **any** the value removed from the back of the buffer
 or `undefined` if empty.
 
 ### shift
 
-Removes a value from the front of the buffer and returns it.
+Removes a value from the front of the buffer and returns it. The
+newly empty buffer location is set to undefined to release any
+object references.
 
 Returns **any** the value removed from the front of the buffer
 or `undefined` if empty.
@@ -95,16 +97,12 @@ Returns **Generator** iterates from front to back
 
 [6]: #push
 
-[7]: #parameters-1
+[7]: #pop
 
-[8]: #pop
+[8]: #shift
 
-[9]: #shift
+[9]: #unshift
 
-[10]: #unshift
+[10]: #iterator
 
-[11]: #parameters-2
-
-[12]: #iterator
-
-[13]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[11]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
