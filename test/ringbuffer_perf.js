@@ -14,9 +14,9 @@ const time = (queue) => {
   }
 }
 
-console.time('queue')
+console.time('ringbuffer')
 time(new RingBuffer(length))
-console.timeEnd('queue')
+console.timeEnd('ringbuffer')
 
 console.time('list')
 time(new List())
