@@ -49,11 +49,13 @@ export class RingBuffer {
    * Pushes a value onto the back of the buffer. If length === capacity,
    * the value at the front of the buffer is discarded.
    * @param {any} value - value to push
+   * @returns {Number} - the current length of the buffer
    */
   push (value) {
     if (this.length === this.capacity) this.shift()
     this.length++
     this._buffer[this._last] = value
+    return this.length
   }
 
   /**
@@ -91,12 +93,14 @@ export class RingBuffer {
    * Pushes a value on the front of the buffer. If length === capacity,
    * the value at the back is discarded.
    * @param {any} value - to push onto the front
+   * @returns {Number} - the current length of the buffer
    */
   unshift (value) {
     if (this.length === this.capacity) this.pop()
     this._left()
     this.length++
     this._buffer[this._first] = value
+    return this.length
   }
 
   /**
