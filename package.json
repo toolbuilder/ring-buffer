@@ -1,50 +1,65 @@
 {
- "name": "@toolbuilder/ring-buffer",
- "version": "1.1.0",
- "description": "Replace your slow Array based fixed length ring buffer, or circular queue, with ring-buffer. RingBuffer is roughly 10x faster, and is a drop in replacement.",
- "keywords": [
-  "ring buffer",
-  "circular queue",
-  "buffer",
-  "iterable",
-  "esm",
-  "ES2015",
-  "module",
-  "bundles"
- ],
- "homepage": "https://github.com/toolbuilder/ring-buffer#readme",
- "bugs": {
-  "url": "https://github.com/toolbuilder/ring-buffer/issues"
- },
- "repository": {
-  "type": "git",
-  "url": "https://github.com/toolbuilder/ring-buffer.git"
- },
- "license": "MIT",
- "main": "index.js",
- "module": "src/ringbuffer.js",
- "files": [
-  "src"
- ],
- "scripts": {
-  "build": "npm-run-all --serial test lint",
-  "lint": "eslint src test",
-  "test": "tape -r esm \"test/*_test.js\""
- },
- "eslintConfig": {
-  "extends": "@toolbuilder/eslint-config"
- },
- "dependencies": {
-  "esm": "^3.2.25"
- },
- "devDependencies": {
-  "@toolbuilder/eslint-config": "^0.1.2",
-  "@toolbuilder/list": "^1.0.0",
-  "@toolbuilder/ring-buffer-tests": "^0.1.0",
-  "documentation": "^12.3.0",
-  "eslint": "^7.1.0",
-  "npm-run-all": "^4.1.5",
-  "tape": "^5.0.1",
-  "zora": "^3.1.9"
- }
+  "name": "@toolbuilder/ring-buffer",
+  "version": "1.1.0",
+  "description": "Replace your slow Array based fixed length ring buffer, or circular queue, with ring-buffer. RingBuffer is roughly 10x faster, and is a drop in replacement.",
+  "keywords": [
+    "ring buffer",
+    "circular queue",
+    "buffer",
+    "iterable",
+    "esm",
+    "ES2015",
+    "module",
+    "bundles"
+  ],
+  "homepage": "https://github.com/toolbuilder/ring-buffer#readme",
+  "bugs": {
+    "url": "https://github.com/toolbuilder/ring-buffer/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/toolbuilder/ring-buffer.git"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "module": "src/ringbuffer.js",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "check": "run-s check:*",
+    "check:packagejson": "npmPkgJsonLint .",
+    "check:packfile": "rollup --config node:@toolbuilder/rollup-config-pkgtest",
+    "check:src": "eslint src test",
+    "check:test": "run-s test",
+    "check:uncommitted": "uncommitted",
+    "prerelease": "run-s check",
+    "release": "standard-version",
+    "test": "tape -r esm \"test/*test.js\""
+  },
+  "eslintConfig": {
+    "extends": "@toolbuilder/eslint-config"
+  },
+  "dependencies": {
+    "esm": "^3.2.25"
+  },
+  "devDependencies": {
+    "@toolbuilder/eslint-config": "^0.1.3",
+    "@toolbuilder/list": "^1.0.0",
+    "@toolbuilder/package-json-lint-config": "^0.1.0",
+    "@toolbuilder/ring-buffer-tests": "^0.1.0",
+    "@toolbuilder/rollup-config-pkgtest": "^0.1.0",
+    "documentation": "^12.3.0",
+    "eslint": "^7.3.1",
+    "npm-package-json-lint": "^5.1.0",
+    "npm-run-all": "^4.1.5",
+    "rollup": "^2.18.0",
+    "standard-version": "^8.0.0",
+    "tape": "^5.0.1",
+    "uncommitted": "^1.0.0",
+    "zora": "^4.0.0"
+  },
+  "npmpackagejsonlint": {
+    "extends": "@toolbuilder/package-json-lint-config"
+  }
 }
