@@ -15,8 +15,7 @@ If you want a priority queue, you could base it on something like [@toolbuilder/
 There are lots of ring buffer implementations on NPM. This implementation:
 
 * Drop in replacement for `Array` for the ring buffer use case.
-* Provides `module` property in `package.json` pointing to the ES module for bundlers.
-* Requires no compiler since it uses [esm](https://github.com/standard-things/esm) to provide the NPM module.
+* Provides both `export` and `module` properties in `package.json` for ES bundlers.
 * Provides `Symbol.iterator` generator.
 
 ## Installation
@@ -46,12 +45,6 @@ log([...ringBuffer]) // prints ['A', 'B']
 log(ringBuffer.length) // prints 2
 ```
 
-If you're using ES modules, you can import directly if you like:
-
-```javascript
-import { RingBuffer } from '@toolbuilder/ring-buffer/src/ringbuffer.js'
-```
-
 ## Performance
 
 There is a simplistic performance test:
@@ -69,8 +62,18 @@ There are **lots** of alternatives on npm.
 
 Contributions are welcome. Please create a pull request.
 
-I use [pnpm](https://pnpm.js.org/) instead of npm, which is why `pnpm-lock.yaml` exists in the git repo.
+* I use [pnpm](https://pnpm.js.org/) instead of npm.
+* Run the unit tests with `pnpm test`
+* Package verification requires [pnpm](https://pnpm.io/) to be installed globally.
+  * `npm install -g pnpm`
+  * `pnpm install`
+  * `pnpm run check:packfile` to test against Node ES and CommonJS projects, as well as Electron.
+  * `pnpm run check` to validate the package is ready for commit
 
 ## Issues
 
 This project uses Github issues.
+
+## License
+
+MIT
