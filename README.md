@@ -35,13 +35,13 @@ const log = console.log
 const ringBuffer = new RingBuffer(10) // max length 10
 log(ringBuffer.length) // prints 0
 
-['A', 'B', 'C'].forEach(x => ringBuffer.push(x))
+;['A', 'B', 'C'].forEach(x => ringBuffer.push(x))
 log(ringBuffer.length) // prints 3
 log(ringBuffer.front()) // prints 'A'
 log(ringBuffer.back()) // prints 'C'
 log(ringBuffer.shift()) // prints 'A'
 log(ringBuffer.length) // prints 2
-log([...ringBuffer]) // prints ['A', 'B']
+log([...ringBuffer]) // prints ['B', 'C']
 log(ringBuffer.length) // prints 2
 ```
 
