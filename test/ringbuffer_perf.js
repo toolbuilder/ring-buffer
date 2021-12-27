@@ -1,5 +1,5 @@
 import { RingBuffer } from '../src/ringbuffer.js'
-import { List } from '@toolbuilder/list/src/list.js'
+import { List } from '@toolbuilder/list'
 
 const iterations = 50000000
 const length = 100

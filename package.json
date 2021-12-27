@@ -39,6 +39,7 @@
     "check": "run-s build check:*",
     "check:packagejson": "npmPkgJsonLint .",
     "check:packfile": "rollup -c rollup.config.test.js",
+    "check:performance": "node test/ringbuffer_perf.js",
     "check:src": "eslint src test",
     "check:test": "run-s test",
     "check:uncommitted": "uncommitted",

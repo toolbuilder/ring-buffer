@@ -2,11 +2,11 @@
 
 `RingBuffer` implements classic fixed length ring buffer (aka circular queue). For the ring buffer use case, `RingBuffer` is a drop in replacement for `Array` because `push`, `pop`, `unshift`, `shift`, and `length` match the signature of Array. For buffer operation either use `push/shift` or `unshift/pop` together.
 
-`RingBuffer` is substantially faster than `Array` for the ring buffer use case. Newer versions of Node are much faster overall, and have improved dramatically for this use case. Using Node 12.16.3, relative times for the same number of push/shift operations are:
+`RingBuffer` is substantially faster than `Array` for the ring buffer use case. Newer versions of Node are much faster overall, and have improved dramatically for this use case. Using Node v16.13.1, relative times for the same number of push/shift operations are:
 
-* RingBuffer: 411ms
-* Array: 3430ms
-* @toolbuilder/list: 2655ms - a doubly linked list
+* RingBuffer: 259ms
+* Array: 2177ms
+* @toolbuilder/list: 882ms - a doubly linked list
 
 `RingBuffer` is a minimalist implementation. If you wish to have functions like map, filter, forEach, and such, please use `RingBuffer` with an iterable library such as [Iterablefu](https://github.com/toolbuilder/iterablefu).
 
@@ -51,7 +51,7 @@ There is a simplistic performance test:
 
 ```bash
 # from package root:
-node -r esm test/ringbuffer_perf.js
+node test/ringbuffer_perf.js
 ```
 
 ## Alternatives
