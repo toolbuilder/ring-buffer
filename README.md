@@ -8,15 +8,19 @@
 * Array: 2177ms
 * @toolbuilder/list: 882ms - a doubly linked list
 
-`RingBuffer` is a minimalist implementation. If you wish to have functions like map, filter, forEach, and such, please use `RingBuffer` with an iterable library such as [Iterablefu](https://github.com/toolbuilder/iterablefu).
+`RingBuffer` is a minimal implementation developed for use with [Await-For-It](https://github.com/toolbuilder/await-for-it) iterable queues.
 
-If you want a priority queue, you could base it on something like [@toolbuilder/list](https://github.com/toolbuilder/list), which supports insertion within the list.
+There are two related buffers:
+
+* [DynamicRingBuffer](https://www.npmjs.com/package/@toolbuilder/dynamic-ring-buffer) that efficiently grows and shrinks as items are added and removed.
+* [PriorityBuffer](https://github.com/toolbuilder/priority-buffer) that uses your comparator to buffer items in priority order.
 
 There are lots of ring buffer implementations on NPM. This implementation:
 
 * Drop in replacement for `Array` for the ring buffer use case.
 * Provides both `export` and `module` properties in `package.json` for ES bundlers.
 * Provides `Symbol.iterator` generator.
+* ES dual module that provides CommonJS and ES implementations.
 
 ## Installation
 
@@ -39,7 +43,7 @@ log(ringBuffer.length) // prints 0
 log(ringBuffer.length) // prints 3
 log(ringBuffer.front()) // prints 'A'
 log(ringBuffer.back()) // prints 'C'
-log(ringBuffer.shift()) // prints 'A'
+log(ringBuffer.shift()) // pulls 'A' off the front and prints 'A'
 log(ringBuffer.length) // prints 2
 log([...ringBuffer]) // prints ['B', 'C']
 log(ringBuffer.length) // prints 2
@@ -63,12 +67,13 @@ There are **lots** of alternatives on npm.
 Contributions are welcome. Please create a pull request.
 
 * I use [pnpm](https://pnpm.js.org/) instead of npm.
-* Run the unit tests with `pnpm test`
 * Package verification requires [pnpm](https://pnpm.io/) to be installed globally.
   * `npm install -g pnpm`
-  * `pnpm install`
-  * `pnpm run check:packfile` to test against Node ES and CommonJS projects, as well as Electron.
-  * `pnpm run check` to validate the package is ready for commit
+  * `pnpm install` to get the dependencies
+  * `pnpm test` to run unit tests
+  * `pnpm run check:packfile` generates pack file to run unit tests against Node ES and CommonJS projects, as well as Electron.
+  * `pnpm run check:performance` to run the performance test
+  * `pnpm run check` validates the package is ready for commit
 
 ## Issues
 
