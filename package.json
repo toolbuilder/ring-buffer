@@ -1,6 +1,6 @@
 {
   "name": "@toolbuilder/ring-buffer",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Replace your slow Array based fixed length ring buffer, or circular queue, with ring-buffer. RingBuffer is roughly 10x faster, and is a drop in replacement.",
   "keywords": [
     "ring buffer",
