@@ -2,11 +2,11 @@
 
 `RingBuffer` implements classic fixed length ring buffer (aka circular queue). For the ring buffer use case, `RingBuffer` is a drop in replacement for `Array` because `push`, `pop`, `unshift`, `shift`, and `length` match the signature of Array. For buffer operation either use `push/shift` or `unshift/pop` together.
 
-`RingBuffer` is substantially faster than `Array` for the ring buffer use case. Newer versions of Node are much faster overall, and have improved dramatically for this use case. Using Node v16.13.1, relative times for the same number of push/shift operations are:
+`RingBuffer` is substantially faster than `Array` for the ring buffer use case. Newer versions of Node are much faster overall, and have improved dramatically for this use case. Using Node v22.11.0, relative times for the same number of push/shift operations are:
 
-* RingBuffer: 259ms
-* Array: 2177ms
-* @toolbuilder/list: 882ms - a doubly linked list
+* RingBuffer: 205ms
+* Array: 767ms
+* @toolbuilder/list: 624ms - a doubly linked list
 
 `RingBuffer` is a minimal implementation developed for use with [Await-For-It](https://github.com/toolbuilder/await-for-it) iterable queues.
 
@@ -69,11 +69,12 @@ Contributions are welcome. Please create a pull request.
 * I use [pnpm](https://pnpm.js.org/) instead of npm.
 * Package verification requires [pnpm](https://pnpm.io/) to be installed globally.
   * `npm install -g pnpm`
-  * `pnpm install` to get the dependencies
+  * `pnpm install --frozen-lockfile` to get the dependencies as published
   * `pnpm test` to run unit tests
   * `pnpm run check:packfile` generates pack file to run unit tests against Node ES and CommonJS projects, as well as Electron.
   * `pnpm run check:performance` to run the performance test
   * `pnpm run check` validates the package is ready for commit
+  * `pnpm run release` updates the changelog based on conventional commits, commits the update, and tags
 
 ## Issues
 
