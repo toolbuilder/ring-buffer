@@ -2,3 +2,5 @@ node_modules
 cjs/*.js
 umd
 *.tgz
+*.d.ts
+*.d.ts.map
