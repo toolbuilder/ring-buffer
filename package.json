@@ -34,35 +34,32 @@
     "src"
   ],
   "scripts": {
-    "build": "rollup -c rollup.config.cjs.js",
+    "build": "run-s build:*",
+    "build:cjs": "rollup -c rollup.config.cjs.js",
     "check": "run-s build check:*",
     "check:packagejson": "npmPkgJsonLint .",
     "check:packfile": "rollup -c rollup.config.test.js",
     "check:performance": "node test/ringbuffer_perf.js",
-    "check:src": "eslint src test",
+    "check:src": "standard src test",
     "check:test": "run-s test",
     "check:uncommitted": "uncommitted",
     "prerelease": "run-s check",
-    "release": "standard-version",
-    "test": "pta \"test/**/*test.js\""
-  },
-  "eslintConfig": {
-    "extends": "@toolbuilder/eslint-config"
+    "release": "commit-and-tag-version",
+    "test": "pta --reporter tap \"test/**/*test.js\""
   },
   "devDependencies": {
-    "@toolbuilder/eslint-config": "^0.1.5",
-    "@toolbuilder/list": "^1.2.2",
-    "@toolbuilder/package-json-lint-config": "^0.1.0",
-    "@toolbuilder/ring-buffer-tests": "^0.1.3",
-    "@toolbuilder/rollup-plugin-test-tools": "^1.0.0",
-    "eslint": "^8.15.0",
-    "npm-package-json-lint": "^6.3.0",
-    "npm-run-all": "^4.1.5",
-    "pta": "^1.0.2",
-    "rollup": "^2.72.1",
-    "standard-version": "^9.3.2",
+    "@toolbuilder/list": "^1.2.3",
+    "@toolbuilder/package-json-lint-config": "^0.1.1",
+    "@toolbuilder/ring-buffer-tests": "^0.1.4",
+    "@toolbuilder/rollup-plugin-test-tools": "^1.1.0",
+    "commit-and-tag-version": "^12.5.0",
+    "npm-package-json-lint": "^8.0.0",
+    "npm-run-all2": "^7.0.1",
+    "pta": "1.2.0",
+    "rollup": "^4.24.4",
+    "standard": "^17.1.2",
     "uncommitted": "^1.0.0",
-    "zora": "^5.0.3"
+    "zora": "5.0.3"
   },
   "npmpackagejsonlint": {
     "extends": "@toolbuilder/package-json-lint-config"
