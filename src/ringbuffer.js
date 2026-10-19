@@ -6,16 +6,28 @@
  * For buffer operation either use push/shift together, or unshift/pop together.
  *
  * RingBuffer is substantially faster than an Array for this use case.
+ *
+ * @template [T=any]
  */
 export class RingBuffer {
   /**
    * Constructs a RingBuffer with fixed maximum capacity.
-   * @param {Number} capacity - maximum number of values in the buffer
+   * @param {number} capacity - maximum number of values in the buffer
    */
   constructor (capacity) {
+    /** @type {number} */
     this.capacity = capacity
+    /**
+     * @private
+     * @type {Array<T | undefined>}
+     */
     this._buffer = new Array(capacity)
+    /**
+     * @private
+     * @type {number}
+     */
     this._first = 0
+    /** @type {number} */
     this.length = 0
   }
 
@@ -29,7 +41,7 @@ export class RingBuffer {
 
   /**
    * Returns the value at the back of the buffer.
-   * @returns {any} - the back of the buffer, or `undefined` if empty
+   * @returns {T | undefined} - the back of the buffer, or `undefined` if empty
    */
   back () {
     if (this.length === 0) return undefined
@@ -38,7 +50,7 @@ export class RingBuffer {
 
   /**
    * Returns the value at the front of the buffer.
-   * @returns {any} - the front of the buffer, or `undefined` if empty
+   * @returns {T | undefined} - the front of the buffer, or `undefined` if empty
    */
   front () {
     if (this.length === 0) return undefined
@@ -48,8 +60,8 @@ export class RingBuffer {
   /**
    * Pushes a value onto the back of the buffer. If length === capacity,
    * the value at the front of the buffer is discarded.
-   * @param {any} value - value to push
-   * @returns {Number} - the current length of the buffer
+   * @param {T} value - value to push
+   * @returns {number} - the current length of the buffer
    */
   push (value) {
     if (this.length === this.capacity) this.shift()
@@ -62,7 +74,7 @@ export class RingBuffer {
    * Removes a value from the back of the buffer and returns it. The
    * newly empty buffer location is set to undefined to release any
    * object references.
-   * @returns {any} the value removed from the back of the buffer
+   * @returns {T | undefined} the value removed from the back of the buffer
    * or `undefined` if empty.
    */
   pop () {
@@ -77,7 +89,7 @@ export class RingBuffer {
    * Removes a value from the front of the buffer and returns it. The
    * newly empty buffer location is set to undefined to release any
    * object references.
-   * @returns {any} the value removed from the front of the buffer
+   * @returns {T | undefined} the value removed from the front of the buffer
    * or `undefined` if empty.
    */
   shift () {
@@ -92,8 +104,8 @@ export class RingBuffer {
   /**
    * Pushes a value on the front of the buffer. If length === capacity,
    * the value at the back is discarded.
-   * @param {any} value - to push onto the front
-   * @returns {Number} - the current length of the buffer
+   * @param {T} value - to push onto the front
+   * @returns {number} - the current length of the buffer
    */
   unshift (value) {
     if (this.length === this.capacity) this.pop()
@@ -105,28 +117,38 @@ export class RingBuffer {
 
   /**
    * Iterator that goes from front to back.
-   * @returns {Generator} - iterates from front to back
+   * @returns {IterableIterator<T>} - iterates from front to back
    */
   * [Symbol.iterator] () {
     let index = this._first
     for (let i = 0; i < this.length; ++i) {
-      yield this._buffer[index++]
+      yield /** @type {T} */ (this._buffer[index++])
       if (index > (this.capacity - 1)) index = 0
     }
   }
 
-  // Calculates the index of the value at the back of the buffer.
+  /**
+   * Calculates the index of the value at the back of the buffer.
+   * @private
+   * @returns {number}
+   */
   get _last () {
     const index = this._first + (this.length - 1)
     return (index > (this.capacity - 1)) ? index - this.capacity : index
   }
 
-  // moves the front of the buffer one step toward the back.
+  /**
+   * Moves the front of the buffer one step toward the back.
+   * @private
+   */
   _right () {
     if (++this._first > (this.capacity - 1)) this._first = 0
   }
 
-  // moves the front of the buffer one step forward.
+  /**
+   * Moves the front of the buffer one step forward.
+   * @private
+   */
   _left () {
     if (--this._first < 0) this._first = this.capacity - 1
   }

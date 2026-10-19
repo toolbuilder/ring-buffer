@@ -1,6 +1,4 @@
-node_modules
-cjs/*.js
-umd
+node_modules/
 *.tgz
 *.d.ts
 *.d.ts.map

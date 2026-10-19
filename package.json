@@ -17,53 +17,35 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/toolbuilder/ring-buffer.git"
+    "url": "git+https://github.com/toolbuilder/ring-buffer.git"
   },
   "license": "MIT",
   "type": "module",
+  "main": "./src/ringbuffer.js",
   "types": "./src/ringbuffer.d.ts",
   "exports": {
-    "require": "./cjs/ringbuffer.js",
-    "types": "./src/ringbuffer.d.ts",
-    "default": "./src/ringbuffer.js"
+    ".": {
+      "types": "./src/ringbuffer.d.ts",
+      "default": "./src/ringbuffer.js"
+    }
   },
-  "main": "cjs/ringbuffer.js",
-  "module": "src/ringbuffer.js",
   "files": [
-    "cjs",
     "src"
   ],
+  "sideEffects": false,
   "scripts": {
-    "build": "run-s build:*",
-    "build:cjs": "rollup -c rollup.config.cjs.js",
-    "build:types": "tsc",
-    "check": "run-s build check:*",
-    "check:packagejson": "npmPkgJsonLint .",
-    "check:packfile": "rollup -c rollup.config.test.js",
-    "check:performance": "node test/ringbuffer_perf.js",
-    "check:src": "standard src test",
-    "check:test": "run-s test",
-    "check:uncommitted": "uncommitted",
-    "prerelease": "run-s check",
-    "release": "commit-and-tag-version",
-    "test": "pta --reporter tap \"test/**/*test.js\""
+    "build": "tsc -p tsconfig.build.json",
+    "check:types": "tsc",
+    "test": "node --test 'test/**/*test.js'",
+    "check": "pnpm run check:types && pnpm run build && pnpm test",
+    "validate:package": "npx -y publint && npx -y @arethetypeswrong/cli --pack . --profile esm-only",
+    "release": "changelogen --release --no-github"
   },
   "devDependencies": {
-    "@toolbuilder/list": "^1.2.4",
-    "@toolbuilder/package-json-lint-config": "^0.1.1",
-    "@toolbuilder/ring-buffer-tests": "^0.1.4",
-    "@toolbuilder/rollup-plugin-test-tools": "^1.1.0",
-    "commit-and-tag-version": "^12.5.0",
-    "npm-package-json-lint": "^8.0.0",
-    "npm-run-all2": "^7.0.1",
-    "pta": "1.2.0",
-    "rollup": "^4.24.4",
-    "standard": "^17.1.2",
-    "typescript": "^5.6.3",
-    "uncommitted": "^1.0.0",
-    "zora": "5.0.3"
-  },
-  "npmpackagejsonlint": {
-    "extends": "@toolbuilder/package-json-lint-config"
+    "@toolbuilder/list": "^2.0.0",
+    "@toolbuilder/ring-buffer-tests": "^1.0.0",
+    "@types/node": "^26.6.5",
+    "changelogen": "^0.6.2",
+    "typescript": "^5.6.3"
   }
 }

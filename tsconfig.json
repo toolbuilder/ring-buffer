@@ -1,21 +1,20 @@
 {
-  "include": ["src/**/*.js"],
+  "include": ["src/**/*.js", "test/**/*.js"],
   "compilerOptions": {
-    // Need >= ES6 to get Iterable and assoc types
-    "target": "ES2022",
-    // Tells TypeScript to read JS files, as
-    // normally they are ignored as source files
     "allowJs": true,
-    // Generate d.ts files
-    "declaration": true,
-    // This compiler run should
-    // only output d.ts files
-    "emitDeclarationOnly": true,
-    // go to js file when using IDE functions like
-    // "Go to Definition" in VSCode
-    "declarationMap": true,
-    // Lookup type declarations using Node resolution
+    "checkJs": true,
+    "noEmit": true,
+
+    "target": "ES2020",
     "module": "NodeNext",
-    "moduleResolution": "NodeNext"
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+
+    "types": ["node"],
+
+    "strict": false,
+    "strictNullChecks": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true
   }
 }

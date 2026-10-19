@@ -1,8 +1,9 @@
-import { test } from 'zora'
+import test from 'node:test'
+import assert from 'node:assert/strict'
 import { RingBuffer } from '../src/ringbuffer.js'
 import { RingBufferDriver } from '@toolbuilder/ring-buffer-tests'
 
-test('test ring buffer interface', assert => {
+test('test ring buffer interface', () => {
   const driver = new RingBufferDriver() // taking default options
   const factory = (capacity) => new RingBuffer(capacity)
   const capacities = [1, 10, 100]
